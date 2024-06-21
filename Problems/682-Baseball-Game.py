@@ -3,15 +3,12 @@ class Solution:
         stack = []
 
         for op in operations:
-            if stack:
-                if op == '+':
-                    stack.append(int(stack[-1]) + int(stack[-2]))
-                elif op == 'C':
-                    stack.pop()
-                elif op == 'D':
-                    stack.append(int(stack[-1]) * 2)
-                else:
-                    stack.append(int(op))
+            if op == '+':
+                stack.append(int(stack[-1]) + int(stack[-2]))
+            elif op == 'C':
+                stack.pop()
+            elif op == 'D':
+                stack.append(int(stack[-1]) * 2)
             else:
                 stack.append(int(op))
 
