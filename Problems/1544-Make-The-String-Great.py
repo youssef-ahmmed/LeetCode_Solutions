@@ -10,4 +10,3 @@ class Solution:
                 stack.append(ch)
 
         return ''.join(stack)
-                
