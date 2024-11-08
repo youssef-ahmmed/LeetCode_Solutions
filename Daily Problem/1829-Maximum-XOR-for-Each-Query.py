@@ -7,9 +7,8 @@ class Solution:
         for num in nums:
             res ^= num
 
-        for i in range(len(nums) - 1, -1, -1):
-            k = max_num ^ res
-            ans.append(k)
-            res ^= nums[i]
+        for num in reversed(nums):
+            ans.append(max_num ^ res)
+            res ^= num
 
         return ans
