@@ -3,15 +3,19 @@ class Solution:
         n = len(code)
         decode = [0] * n
 
-        if k == 0:
-            return decode
+        l = 0
+        w_sum = 0
+        for r in range(n + abs(k)):
+            w_sum += code[r % n]
 
-        for i in range(n):
-            if k > 0:
-                for j in range(1, k + 1):
-                    decode[i] += code[(i + j) % n]
-            else:
-                for j in range(k, 0):
-                    decode[i] += code[(i + j) % n]
+            if r - l + 1 > abs(k):
+                w_sum -= code[l % n]
+                l = (l + 1) % n
+
+            if r - l + 1 == abs(k):
+                if k > 0:
+                    decode[(l - 1) % n] = w_sum
+                elif k < 0:
+                    decode[(r + 1) % n] = w_sum
 
         return decode
