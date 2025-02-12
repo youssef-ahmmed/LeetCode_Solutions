@@ -1,7 +1,8 @@
 class Solution:
     def maximumSum(self, nums: List[int]) -> int:
         n = len(nums)
-        d = defaultdict(list)
+        d = defaultdict(int)
+        max_sum = -1
 
         def sum_digits(num: int):
             s = 0
@@ -10,14 +11,13 @@ class Solution:
                 num //= 10
                 s += d
             return s
-        
+
         for n in nums:
-            heapq.heappush(d[sum_digits(n)], -n)
+            dig_sum = sum_digits(n)
 
-        max_sum = 0
-        for heap in d.values():
-            if len(heap) > 1:
-                num1, num2 = -heapq.heappop(heap), -heapq.heappop(heap)
-                max_sum = max(max_sum, num1 + num2)
+            if dig_sum in d:
+                max_sum = max(max_sum, n + d[dig_sum])
+            
+            d[dig_sum] = max(d[dig_sum], n)
 
-        return max_sum if max_sum else -1
+        return max_sum
