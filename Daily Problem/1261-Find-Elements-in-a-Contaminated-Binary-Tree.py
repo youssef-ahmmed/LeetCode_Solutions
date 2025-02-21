@@ -7,37 +7,19 @@
 class FindElements:
 
     def __init__(self, root: Optional[TreeNode]):
-        root.val = 0
-        self.root = root
-        self.contaminate_tree(self.root)
-
-    def contaminate_tree(self, root):
-        if not root:
-            return
-
-        if root.left:
-            root.left.val = 2 * root.val + 1
-            self.contaminate_tree(root.left)
-        if root.right:
-            root.right.val = 2 * root.val + 2
-            self.contaminate_tree(root.right)
+        self.vals = set()
+        self.dfs(root, 0)
 
     def find(self, target: int) -> bool:
-        return self.search(self.root, target)
+        return target in self.vals
 
-    def search(self, root, target):
+    def dfs(self, root, val):
         if not root:
-            return found
- 
-        found = target == root.val
-
-        if not found and root.left:
-            found = self.search(root.left, target)
-        if not found and root.right:
-            found = self.search(root.right, target)
+            return
         
-        return found
-
+        self.vals.add(val)
+        self.dfs(root.left, 2 * val + 1)
+        self.dfs(root.right, 2 * val + 2)
 
 
 
