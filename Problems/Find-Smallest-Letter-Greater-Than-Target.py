@@ -10,4 +10,4 @@ class Solution:
             else:
                 r = m
 
-        return letters[l] if l < len(letters) else letters[0]
+        return letters[l % len(letters)]
